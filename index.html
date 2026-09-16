@@ -1,1 +1,65 @@
-hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Class portal for my coding assignments.">
+  <title>Class Portal | Gavin Walker</title>
+  <style>
+    body {
+      font-family: Verdana, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 1rem;
+      color: #1a1a1a;
+      background-color: #ffffff;
+    }
+    a {
+      color: #0645ad;
+    }
+    a:focus {
+      outline: 3px solid #1a1a1a;
+      outline-offset: 2px;
+    }
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+    }
+    .skip-link:focus {
+      position: static;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lets keyboard users jump past the navigation -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <h1>Gavin's Class Portal</h1>
+  </header>
+
+  <nav aria-label="Coding assignments">
+    <h2>My Assignments</h2>
+    <ul>
+      <li><a href="#">Assignment 1 (coming soon)</a></li>
+      <li><a href="#">Assignment 2 (coming soon)</a></li>
+      <li><a href="#">Assignment 3 (coming soon)</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-content">
+    <section aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p>Hi! My name is Your Name. I'm a student in ATLS-CSCI 3150-001.</p>
+      <p>A few things about me: I enjoy plants and performing, I'm studying Computer Science, and I'm excited to learn how to build accessible websites.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Gavin Walker</p>
+  </footer>
+
+</body>
+</html>
