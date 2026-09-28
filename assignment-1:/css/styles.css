@@ -1,0 +1,405 @@
+/* ==========================================================
+   Mascot – HTML5 semantic recode
+   ========================================================== */
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #ffffff;
+  --text: #000000;
+  --muted: #000000;
+  --border: #cccccc;
+  --accent: #0b5cad;
+  --accent-strong: #083f78;
+  --highlight: #c2410c;
+  --focus: #c2410c;
+  --measure: 42rem;
+  --radius: 6px;
+  color-scheme: light;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.2;
+  margin: 2rem 0 0.75rem;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.25rem 0; }
+h2 {
+  font-size: 1.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
+h3 { font-size: 1.25rem; }
+
+/* anchor targets clear the top edge when jumped to */
+[id] {
+  scroll-margin-top: 1.5rem;
+}
+
+p,
+ul,
+ol,
+dl,
+table {
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--accent-strong);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+sup {
+  line-height: 0;
+  font-size: 0.72em;
+}
+
+sup a {
+  text-decoration: none;
+  padding: 0 0.1em;
+}
+
+/* ---------- Accessibility ---------- */
+
+/* Hide only visually, but have it available for screen readers */
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--text);
+  color: var(--bg);
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transform: translateY(-150%);
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* the section the reader jumped to gets a subtle marker */
+:target > h2:first-child,
+:target > h3:first-child {
+  color: var(--highlight);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .skip-link { transition: none; }
+}
+
+/* ---------- Page header ---------- */
+
+.site-header {
+  padding: 2.5rem 1rem 2rem;
+  border-bottom: 4px double var(--border);
+  background: var(--surface);
+}
+
+.site-header > * {
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.eyebrow {
+  margin-bottom: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Layout ---------- */
+
+/* No wrapper div: on small screens nav and main just stack with side
+   padding; on wide screens body itself becomes the grid. */
+.toc,
+main {
+  margin-inline: 1rem;
+}
+
+@media (min-width: 60em) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr 15rem minmax(0, 54rem) 1fr;
+    column-gap: 3rem;
+    align-items: start;
+  }
+
+  .site-header,
+  .site-footer {
+    grid-column: 1 / -1;
+  }
+
+  .toc {
+    grid-column: 2;
+    margin-inline: 0;
+  }
+
+  main {
+    grid-column: 3;
+    margin-inline: 0;
+  }
+}
+
+/* ---------- Table of contents ---------- */
+
+.toc {
+  margin-block: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+
+.toc h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.toc ol ol {
+  padding-left: 1rem;
+  font-size: 0.95em;
+}
+
+.toc li {
+  margin: 0.2rem 0;
+}
+
+.toc a {
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 60em) {
+  .toc {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+}
+
+/* ---------- Article ---------- */
+
+.article {
+  padding-bottom: 2rem;
+}
+
+.lead {
+  font-size: 1.2rem;
+}
+
+dfn {
+  font-style: normal;
+  font-weight: 700;
+}
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* "See also" / "Main article" notes under headings */
+.hatnote {
+  margin-top: -0.25rem;
+  padding-left: 1.5rem;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* [citation needed] style tags */
+.tag a {
+  text-decoration: none;
+}
+
+/* ---------- Figures ---------- */
+
+.figure {
+  margin: 0.5rem 0 1.5rem;
+  padding: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.figure img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.figure figcaption {
+  padding: 0.5rem 0.25rem 0.15rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.figure--portrait {
+  max-width: 18rem;
+}
+
+/* two photos side by side sharing one caption */
+.figure--pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.figure--pair figcaption {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 40em) {
+  .figure--right {
+    float: right;
+    clear: right;
+    width: 22rem;
+    margin-left: 1.5rem;
+  }
+
+  .figure--portrait {
+    width: 16rem;
+  }
+}
+
+/* ---------- References ---------- */
+
+.references {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.references li {
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.backlink,
+.backlinks a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.references li:target {
+  background: var(--surface-alt);
+  outline: 2px solid var(--highlight);
+  outline-offset: 2px;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  padding: 1.5rem 1rem 2.5rem;
+  border-top: 4px double var(--border);
+  background: var(--surface);
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.site-footer p {
+  max-width: 72rem;
+  margin: 0.5rem auto;
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  .skip-link,
+  .toc {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  body {
+    display: block;
+  }
+}
