@@ -1,0 +1,517 @@
+/* ==========================================================
+   Mascot – HTML5 semantic recode  (part 2: type, color, layout)
+
+   FONTS (Google Fonts, loaded in index.html)
+     Headings:   Lora (serif) 600/700
+     Paragraphs: Atkinson Hyperlegible (sans-serif) 400/700
+                 – designed by the Braille Institute for low-vision
+                   readers; letters like I l 1 and O 0 are distinct.
+
+   COLOR SCHEME  (built on color.adobe.com, color-blind safe)
+     Navy    #14213D   header/footer background, headings
+     Blue    #2B5C9E   links
+     Amber   #F2A541   accents on navy only (never text on light)
+     Rust    #A84A0E   focus ring, "you are here" highlight
+     Paper   #FAF7F0   page background
+   Blue/orange is the classic pairing that stays distinct for
+   protanopia, deuteranopia and tritanopia. Links are also
+   underlined, so color is never the only cue.
+
+   CONTRAST (WCAG 2.x, AA = 4.5:1, AAA = 7:1)
+     Ink   #1E2329 on Paper   14.78:1  AAA
+     Navy  #14213D on Paper   14.93:1  AAA
+     Blue  #2B5C9E on Paper    6.28:1  AA
+     Blue  #2B5C9E on Mist     5.97:1  AA
+     Muted #4A5160 on Paper    7.44:1  AAA
+     Rust  #A84A0E on Paper    5.38:1  AA
+     Paper on Navy            14.93:1  AAA
+     Amber on Navy             7.78:1  AAA
+     Sky   #A9C6EC on Navy     9.11:1  AAA
+   ========================================================== */
+
+:root {
+  /* palette */
+  --navy: #14213d;
+  --blue: #2b5c9e;
+  --amber: #f2a541;
+  --rust: #a84a0e;
+  --paper: #faf7f0;
+
+  /* supporting tints */
+  --ink: #1e2329;
+  --muted: #4a5160;
+  --mist: #edf2f8;
+  --sky: #a9c6ec;
+  --rule: #cfd6e0;
+
+  /* type */
+  --font-head: "Lora", Georgia, "Times New Roman", serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* layout */
+  --measure: 48rem;     /* text column: ~100 characters of 18px body text */
+  --wrapper: var(--measure);
+  --toc-width: 15rem;
+  --gap: 3rem;
+  --radius: 6px;
+  color-scheme: light;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;          /* 18px body copy */
+  line-height: 1.65;            /* generous leading for long reads */
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--navy);
+  margin: 2.5rem 0 0.75rem;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
+  margin: 0.25rem 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--rule);
+}
+
+h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 1.1em;
+  text-wrap: pretty;
+  hyphens: manual;
+}
+
+ul,
+ol {
+  padding-left: 1.5rem;
+}
+
+/* anchor targets clear the top edge when jumped to */
+[id] {
+  scroll-margin-top: 1.5rem;
+}
+
+a {
+  color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--navy);
+  text-decoration-thickness: 2px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+dfn {
+  font-style: normal;
+  font-weight: 700;
+}
+
+sup {
+  line-height: 0;
+  font-size: 0.72em;
+}
+
+sup a {
+  text-decoration: none;
+  padding: 0 0.1em;
+}
+
+/* ---------- Accessibility ---------- */
+
+/* Hide only visually, but have it available for screen readers */
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--amber);
+  color: var(--navy);
+  font-weight: 700;
+  border-radius: var(--radius);
+  transform: translateY(-150%);
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--navy);
+}
+
+:focus-visible {
+  outline: 3px solid var(--rust);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* the section the reader jumped to gets a marker that is
+   not color alone: a rust bar beside the heading */
+:target > h2:first-child,
+:target > h3:first-child {
+  color: var(--rust);
+  box-shadow: -0.75rem 0 0 -0.4rem var(--rust);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .skip-link { transition: none; }
+}
+
+/* ---------- Auto-centering wrapper (no divs) ---------- */
+
+/* <body> itself is the wrapper. min() keeps a 1rem gutter on small
+   screens; margin-inline:auto centers it on large ones.
+   One column: the wrapper is the text measure (48rem ≈ 100 characters
+   per line). Two columns: it grows by exactly the sidebar + gap, so
+   the article column stays 48rem and lines still top out near 100. */
+body {
+  width: min(100% - 2rem, var(--wrapper));
+  margin-inline: auto;
+}
+
+@media (min-width: 62em) {
+  :root {
+    --wrapper: calc(var(--measure) + var(--toc-width) + var(--gap));
+  }
+
+  body {
+    display: grid;
+    grid-template-columns: var(--toc-width) minmax(0, 1fr);
+    column-gap: var(--gap);
+    align-items: start;
+  }
+
+  .site-header,
+  .site-footer {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Page header ---------- */
+
+/* The header and footer stay inside the wrapper, so their text lines
+   up with the article. Their navy band is painted edge to edge with
+   border-image outset (100vmax each side), which is drawn outside the
+   box without causing horizontal scrolling. */
+.site-header {
+  padding: 2.5rem 0 calc(2.25rem + 6px);
+  color: var(--paper);
+  background: var(--navy);
+  border-image: linear-gradient(var(--navy) calc(100% - 6px), var(--amber) 0) fill 0 / 0 / 0 100vmax;
+}
+
+.site-header h1 {
+  color: var(--paper);
+}
+
+.site-header a {
+  color: var(--sky);
+}
+
+.site-header a:hover {
+  color: var(--paper);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+/* ---------- Table of contents ---------- */
+
+.toc {
+  margin-block: 2rem;
+  padding: 1.1rem 1.25rem 1.25rem;
+  background: var(--mist);
+  border-top: 4px solid var(--blue);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.toc h2 {
+  margin: 0 0 0.6rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.15rem;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.toc ol ol {
+  padding-left: 1rem;
+  font-size: 0.95em;
+}
+
+.toc li {
+  margin: 0.3rem 0;
+}
+
+.toc li::marker {
+  color: var(--muted);
+}
+
+.toc a {
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 62em) {
+  .toc {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+}
+
+/* ---------- Article ---------- */
+
+main {
+  padding-bottom: 2.5rem;
+}
+
+main > section:first-child > h2 {
+  margin-top: 2rem;
+}
+
+/* first paragraph of the article reads as a lead-in */
+#overview > h2 + figure + p {
+  font-size: 1.2rem;
+}
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* "See also" / "Main article" notes under headings */
+.hatnote {
+  margin-top: -0.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--rule);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.site-header .hatnote {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--paper);
+}
+
+/* [citation needed] style tags */
+.tag a {
+  text-decoration: none;
+}
+
+/* ---------- Figures ---------- */
+
+.figure {
+  margin: 0.4rem 0 1.5rem;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.figure img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.figure figcaption {
+  padding: 0.55rem 0.25rem 0.15rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* two photos side by side sharing one caption */
+.figure--pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.figure--pair figcaption {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 40em) {
+  .figure--right {
+    float: right;
+    clear: right;
+    width: 22rem;
+    margin-left: 1.75rem;
+  }
+
+  .figure--portrait {
+    width: 15rem;
+  }
+}
+
+/* ---------- Lists at the end ---------- */
+
+#see-also li,
+#external-links li {
+  margin-bottom: 0.35rem;
+}
+
+.references {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.references li {
+  margin-bottom: 0.6rem;
+  padding-left: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.references li::marker {
+  color: var(--muted);
+}
+
+.backlink,
+.backlinks a {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.references li:target {
+  background: var(--mist);
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  margin-top: 1rem;
+  padding: calc(1.75rem + 6px) 0 2.5rem;
+  background: var(--navy);
+  color: var(--paper);
+  border-image: linear-gradient(var(--amber) 6px, var(--navy) 0) fill 0 / 0 / 0 100vmax;
+  font-size: 0.95rem;
+}
+
+.site-footer p {
+  max-width: var(--measure);
+  margin: 0.5rem 0;
+}
+
+.site-footer a {
+  color: var(--sky);
+}
+
+.site-footer a:hover {
+  color: var(--paper);
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  .skip-link,
+  .toc {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .site-header,
+  .site-footer {
+    background: none;
+    border-image: none;
+    color: #000;
+  }
+
+  .site-header h1,
+  .site-header .hatnote {
+    color: #000;
+  }
+
+  body {
+    display: block;
+    width: auto;
+  }
+}
