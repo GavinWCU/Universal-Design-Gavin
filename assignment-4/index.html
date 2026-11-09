@@ -16,15 +16,18 @@
   <!-- Skip link: the first focusable element on the page -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <header class="site-header">
-    <p class="site-tagline">Costumes, cheers &amp; chaos</p>
-    <h1 class="site-title">Mascot Mania</h1>
+  <header class="site-header" id="top">
+    <!-- hgroup: title is read first; CSS shows the tagline above it -->
+    <hgroup>
+      <h1 class="site-title">Mascot Mania</h1>
+      <p class="site-tagline">Costumes, cheers &amp; chaos</p>
+    </hgroup>
   </header>
 
   <nav class="site-nav" aria-labelledby="nav-heading">
     <h2 id="nav-heading" class="visually-hidden">Main navigation</h2>
     <ul class="nav-list">
-      <li><a href="#main-content" aria-current="page">Home</a></li>
+      <li><a href="#main-content">Home</a></li>
       <li><a href="#history">History</a></li>
       <li><a href="#design">Design</a></li>
       <li><a href="#life-in-the-suit">Life in the Suit</a></li>
@@ -93,7 +96,7 @@
 
   <footer class="site-footer">
     <p>&copy; 2026 Mascot Mania. A class project about mascots.</p>
-    <p><a href="#main-content">Back to top</a></p>
+    <p><a href="#top">Back to top</a></p>
   </footer>
 
 </body>

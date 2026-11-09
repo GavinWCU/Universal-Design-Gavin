@@ -156,7 +156,15 @@ body {
   color: var(--gold);
 }
 
+/* Title comes first in the HTML for screen readers;
+   order: -1 shows the tagline above it */
+.site-header hgroup {
+  display: flex;
+  flex-direction: column;
+}
+
 .site-tagline {
+  order: -1;
   margin: 0 0 0.25rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -245,11 +253,6 @@ aside ul {
   background-color: var(--gold);
 }
 
-.nav-list a[aria-current="page"] {
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
-}
-
 /* =========================================================
    8. TABLET (up to 900px)
    Main goes full width; the two asides sit side by side below it
@@ -268,16 +271,17 @@ aside ul {
 
 /* =========================================================
    9. MOBILE (up to 600px)
-   One column; nav moves below main and stacks vertically
-   with large tap targets ("thumb-able")
+   One column; nav stays under the header (so Tab order
+   matches what you see) and stacks vertically with large
+   tap targets ("thumb-able")
    ========================================================= */
 @media (max-width: 37.5em) {
   body {
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
-      "main"
       "nav"
+      "main"
       "facts"
       "fame"
       "footer";
