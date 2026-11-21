@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How | Chip Can't Talk</title>
+  <meta name="description" content="Each technique is one more way Chip “talks” without words.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+</head>
+<body class="page-inner">
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header>
+    <p class="brand"><a href="index.html">Chip Can't Talk</a></p>
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="why.html">Why</a></li>
+        <li><a href="what.html">What</a></li>
+        <li><a href="how.html" aria-current="page">How</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <header class="page-intro">
+      <p class="eyebrow">How</p>
+      <h1>How do you design for everyone?</h1>
+      <p class="lede">Each technique is one more way Chip “talks” without words.</p>
+    </header>
+
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title">On this page</h2>
+      <ol>
+        <li><a href="#semantic-html">Semantic HTML</a></li>
+        <li><a href="#headings">Headings</a></li>
+        <li><a href="#alt-text">Alt text</a></li>
+        <li><a href="#captions-and-transcripts">Captions and transcripts</a></li>
+        <li><a href="#color-and-contrast">Color and contrast</a></li>
+        <li><a href="#type-and-plain-language">Type and plain language</a></li>
+        <li><a href="#keyboard-access">Keyboard access</a></li>
+        <li><a href="#mobile-first-and-touch">Mobile first and touch</a></li>
+        <li><a href="#forms-aria-and-motion">Forms, ARIA and motion</a></li>
+        <li><a href="#testing">Testing</a></li>
+      </ol>
+    </nav>
+
+    <article class="page-content" aria-label="How topics">
+
+      <section class="mock-section" id="semantic-html" aria-labelledby="semantic-html-title">
+        <h2 id="semantic-html-title">Semantic HTML</h2>
+        <ul>
+          <li>Landmarks: <code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>. No divs.</li>
+          <li>Tables for data only, with a caption and <code>th scope</code>.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="headings" aria-labelledby="headings-title">
+        <h2 id="headings-title">Headings</h2>
+        <ul>
+          <li>One <code>h1</code> per page, then <code>h2</code> and <code>h3</code> in order.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="alt-text" aria-labelledby="alt-text-title">
+        <h2 id="alt-text-title">Alt text</h2>
+        <ul>
+          <li>Describe what Chip is doing and why it matters. Empty alt for decorative images.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="captions-and-transcripts" aria-labelledby="captions-and-transcripts-title">
+        <h2 id="captions-and-transcripts-title">Captions and transcripts</h2>
+        <ul>
+          <li>Captions on Chip skit videos, transcripts for anything spoken.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="color-and-contrast" aria-labelledby="color-and-contrast-title">
+        <h2 id="color-and-contrast-title">Color and contrast</h2>
+        <ul>
+          <li>4.5:1 for body text. Never use color alone to carry meaning.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="type-and-plain-language" aria-labelledby="type-and-plain-language-title">
+        <h2 id="type-and-plain-language-title">Type and plain language</h2>
+        <ul>
+          <li>Readable fonts, comfortable size and line height, short chunks of text.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="keyboard-access" aria-labelledby="keyboard-access-title">
+        <h2 id="keyboard-access-title">Keyboard access</h2>
+        <ul>
+          <li>Skip link, logical tab order, visible focus ring.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="mobile-first-and-touch" aria-labelledby="mobile-first-and-touch-title">
+        <h2 id="mobile-first-and-touch-title">Mobile first and touch</h2>
+        <ul>
+          <li>Grid for 2D layout, flexbox for 1D. 48px tap targets. Works at 200% zoom.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="forms-aria-and-motion" aria-labelledby="forms-aria-and-motion-title">
+        <h2 id="forms-aria-and-motion-title">Forms, ARIA and motion</h2>
+        <ul>
+          <li>A label on every field, <code>fieldset</code> and <code>legend</code>.</li>
+          <li>Use ARIA only when HTML can't do the job. Respect reduced motion.</li>
+        </ul>
+      </section>
+
+      <section class="mock-section" id="testing" aria-labelledby="testing-title">
+        <h2 id="testing-title">Testing</h2>
+        <ul>
+          <li>Nu HTML Checker, HTML5 Outliner, WAVE, Silktide, Lighthouse, keyboard-only test.</li>
+          <li>Screen readers: VoiceOver, NVDA, TalkBack.</li>
+        </ul>
+      </section>
+
+    </article>
+
+  </main>
+
+  <footer>
+    <p>Made by Gavin Walker for ATLS 3150: Universal Design for Digital Media, Fall 2026.</p>
+    <p>Student project, not affiliated with CU Athletics.</p>
+    <p><a href="#main">Back to top</a></p>
+  </footer>
+
+</body>
+</html>

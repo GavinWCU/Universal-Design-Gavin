@@ -1,0 +1,337 @@
+/* =========================================================
+   Chip Can't Talk – final project mockup
+
+   FONTS (Google Fonts, imported first)
+     Headings: Space Grotesk 500/700
+     Body:     Atkinson Hyperlegible 400/700, made for
+               low-vision readers
+
+   COLOR (Adobe Color palette, checked for WCAG AA)
+     ink on cream    17.5:1   body text
+     slate on cream   7.6:1   secondary text
+     brick on cream   7.0:1   links
+     gold on ink      9.6:1   text on dark areas
+     gold on white    1.9:1   fails, so gold is never text on light
+
+   LAYOUT
+     Mobile first. Grid areas for the page, flexbox for the nav.
+     Breakpoints: 40em (tablet), 56em (desktop). No divs.
+   ========================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@500;700&display=swap");
+
+:root {
+  --ink: #121212;
+  --gold: #cfb87c;
+  --cream: #fbf7ee;
+  --sand: #f3e9cc;
+  --slate: #4b5057;
+  --brick: #9e2a2b;
+  --white: #ffffff;
+
+  --font-head: "Space Grotesk", "Arial Black", sans-serif;
+  --font-body: "Atkinson Hyperlegible", Verdana, sans-serif;
+
+  --radius: 1rem;
+  --tap: 3rem; /* 48px tap targets */
+}
+
+/* ---------- Base (phones) ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--cream);
+
+  /* Page layout: grid areas, one column on phones */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2.25rem, 8vw, 4rem); }
+h2 { font-size: clamp(1.5rem, 5vw, 2.1rem); }
+h3 { font-size: 1.25rem; }
+
+p,
+ul,
+ol {
+  margin: 0 0 1em;
+  max-width: 65ch;
+}
+
+a { color: var(--brick); }
+a:hover { color: var(--ink); }
+
+code {
+  padding: 0.1em 0.3em;
+  font-size: 0.95em;
+  background-color: var(--sand);
+  border-radius: 0.3em;
+}
+
+/* ---------- Skip link and focus ---------- */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  z-index: 10;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  background-color: var(--gold);
+  border-radius: 0 0 0.75rem 0.75rem;
+  transform: translateY(-120%);
+  transition: transform 0.2s ease-out;
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid var(--brick);
+  outline-offset: 3px;
+}
+
+main:focus { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}
+
+/* ---------- Header + nav (flexbox) ---------- */
+body > header {
+  grid-area: header;
+  padding: 1rem;
+  color: var(--cream);
+  background-color: var(--ink);
+  border-bottom: 6px solid var(--gold);
+}
+
+.brand {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.brand a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* Phones: pill buttons, two per row, 48px tall (thumb-able) */
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-list li { flex: 1 1 calc(50% - 0.5rem); }
+
+.nav-list a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: 0 1rem;
+  font-weight: 700;
+  color: var(--cream);
+  text-decoration: none;
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+}
+
+.nav-list a:hover,
+.nav-list a[aria-current="page"] {
+  color: var(--ink);
+  background-color: var(--gold);
+}
+
+/* ---------- Main ---------- */
+main {
+  grid-area: main;
+  padding: 1.5rem 1rem 3rem;
+}
+
+main > section,
+main > nav {
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.lede {
+  font-size: 1.25rem;
+  color: var(--slate);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0 1.25rem;
+  font-weight: 700;
+  color: var(--cream);
+  text-decoration: none;
+  background-color: var(--brick);
+  border-radius: 999px;
+}
+
+.button:hover {
+  color: var(--ink);
+  background-color: var(--gold);
+}
+
+/* Cards: path cards on home, timeline, page sections */
+.card-list,
+.timeline {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: none;
+}
+
+.card-list li,
+.timeline li,
+.mock-section {
+  padding: 1.25rem;
+  background-color: var(--white);
+  border: 2px solid var(--sand);
+  border-radius: var(--radius);
+}
+
+.timeline li { border-left: 6px solid var(--gold); }
+.timeline .now { border-color: var(--brick); }
+
+.year {
+  margin: 0;
+  font-weight: 700;
+  color: var(--brick);
+}
+
+.big-quote {
+  padding: 1.25rem;
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--gold);
+  background-color: var(--ink);
+  border-radius: var(--radius);
+}
+
+/* "On this page" list on the inner pages */
+.toc {
+  padding: 1rem 1.25rem;
+  background-color: var(--sand);
+  border-radius: var(--radius);
+}
+
+.toc h2 { font-size: 1.2rem; }
+.toc ol { margin: 0; }
+
+.mock-section ul { margin-bottom: 0; }
+
+/* ---------- Footer ---------- */
+body > footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  font-size: 0.95rem;
+  color: var(--cream);
+  background-color: var(--ink);
+}
+
+body > footer p { margin: 0; }
+body > footer a { color: var(--gold); }
+
+/* ---------- Tablet: 40em and up ---------- */
+@media (min-width: 40em) {
+  .nav-list li { flex: 0 1 auto; }
+
+  .card-list { grid-template-columns: repeat(3, 1fr); }
+  .timeline  { grid-template-columns: repeat(2, 1fr); }
+
+  main { padding: 2rem; }
+}
+
+/* ---------- Desktop: 56em and up ---------- */
+@media (min-width: 56em) {
+  body > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+
+  .brand { margin: 0; }
+
+  .timeline { grid-template-columns: repeat(4, 1fr); }
+
+  main {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  /* Inner pages: sticky "On this page" menu beside the content */
+  .page-inner main {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    grid-template-areas:
+      "intro intro"
+      "toc   content";
+    column-gap: 2rem;
+    align-items: start;
+  }
+
+  .page-inner .page-intro { grid-area: intro; }
+
+  .page-inner .toc {
+    grid-area: toc;
+    position: sticky;
+    top: 1rem;
+  }
+
+  .page-inner .page-content { grid-area: content; }
+
+  body > footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+  }
+}
