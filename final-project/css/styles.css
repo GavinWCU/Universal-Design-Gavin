@@ -2,7 +2,7 @@
    Chip Can't Talk – final project mockup
 
    FONTS (Google Fonts, imported first)
-     Headings: Space Grotesk 500/700
+     Headings: Archivo 500/800, a bold, wide sports-style sans
      Body:     Atkinson Hyperlegible 400/700, made for
                low-vision readers
 
@@ -17,7 +17,7 @@
      Mobile first. Grid areas for the page, flexbox for the nav.
      Breakpoints: 40em (tablet), 56em (desktop). No divs.
    ========================================================= */
-@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Archivo:wght@500;800&display=swap");
 
 :root {
   --ink: #121212;
@@ -28,7 +28,7 @@
   --brick: #9e2a2b;
   --white: #ffffff;
 
-  --font-head: "Space Grotesk", "Arial Black", sans-serif;
+  --font-head: "Archivo", "Arial Black", sans-serif;
   --font-body: "Atkinson Hyperlegible", Verdana, sans-serif;
 
   --radius: 1rem;
@@ -64,7 +64,7 @@ h1,
 h2,
 h3 {
   font-family: var(--font-head);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.15;
   margin: 0 0 0.5em;
 }
